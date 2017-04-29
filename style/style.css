@@ -116,6 +116,12 @@ bottom: 5px;
       color: white;
 }
 
+
+.yellow-btn {
+    background-image: -webkit-linear-gradient(top, #FFD800,#E6BF00);
+      border: 1px solid #CCA500;
+      color: white;
+}
 .blinking-cursor {
 
   font-weight: 100;
