@@ -24,7 +24,7 @@ class CalculatorButtons extends Component {
             return (<div className={"calculator-input-btn " + styles} onClick={() => {
                     this.onInputClick(input)
                 }}>
-				{input}</div>);
+                {input}</div>);
         });
     }
 
@@ -33,6 +33,13 @@ class CalculatorButtons extends Component {
     }
     generateDarkButtons(array) {
         return this.generateButtons(array, 'darken-btn');
+    }
+
+    generateCustomButton(inputName, input, styles) {
+        return (<div className={"calculator-input-btn " + styles} onClick={() => {
+                this.onInputClick(input)
+            }}>
+                {inputName}</div>);
     }
 
     generatePlaceHolderButtons(num) {
@@ -46,42 +53,46 @@ class CalculatorButtons extends Component {
     render() {
         return (
             <div>
-			<div className="calculator-input-row">
-				{this.generateButtons([CLEAR], "red-btn")}
-				{this.generateButtons([PREV], "yellow-btn")}
-				{this.generatePlaceHolderButtons(1)}
-				{this.generateDarkButtons([LEFT_ARROW, RIGHT_ARROW, BACKSPACE])}
-				{this.generateDarkButtons([POWER], "common-operation")}
-			</div>
-			<div className="calculator-input-row">
-				{this.generateDarkButtons([RAD, DEG, FACTORIAL, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, PERCENT])}
-				{this.generateDarkButtons([DIVIDE], "common-operation")}
-			</div>
-			<div className="calculator-input-row">
-				{this.generateDarkButtons([PI, SIN, LN])}
-				{this.generateLightButtons([SEVEN, EIGHT, NINE])}
-				{this.generateDarkButtons([MULTIPLY], "common-operation")}
-			</div>
-				<div className="calculator-input-row">
-				{this.generateDarkButtons([NATURAL_LOG_NUMBER, COS, LOG])}
-				{this.generateLightButtons([FOUR, FIVE, SIX])}
-				{this.generateDarkButtons([SUBTRACT], "common-operation")}
-			</div>
-				<div className="calculator-input-row">
-				{this.generateDarkButtons([PHI, TAN, SQRT])}
-				{this.generateLightButtons([ONE, TWO, THREE])}
-				{this.generateDarkButtons([ADD], "common-operation")}
-			</div>
-				<div className="calculator-input-row">
-				{this.generateDarkButtons([ANS, EXP, MOD])}
-				{this.generateLightButtons([ZERO, DECIMAL, NEG])}
-				{this.generateButtons([EVALUATE], "blue-btn common-operation")}
-			</div>
-			</div>
+            <div className="calculator-input-row">
+                {this.generateButtons([CLEAR], "red-btn")}
+                {this.generateButtons([PREV], "yellow-btn")}
+                {this.generatePlaceHolderButtons(1)}
+                {this.generateDarkButtons([LEFT_ARROW, RIGHT_ARROW, BACKSPACE])}
+                {this.generateDarkButtons([POWER], "common-operation")}
+            </div>
+            <div className="calculator-input-row">
+                {this.generateDarkButtons([RAD, DEG, FACTORIAL, LEFT_PARENTHESIS, RIGHT_PARENTHESIS, PERCENT])}
+                {this.generateDarkButtons([DIVIDE], "common-operation")}
+            </div>
+            <div className="calculator-input-row">
+                {this.generateDarkButtons([PI, SIN, LN])}
+                {this.generateLightButtons([SEVEN, EIGHT, NINE])}
+                {this.generateDarkButtons([MULTIPLY], "common-operation")}
+            </div>
+                <div className="calculator-input-row">
+                {this.generateDarkButtons([NATURAL_LOG_NUMBER, COS, LOG])}
+                {this.generateLightButtons([FOUR, FIVE, SIX])}
+                {this.generateDarkButtons([SUBTRACT], "common-operation")}
+            </div>
+                <div className="calculator-input-row">
+                {this.generateDarkButtons([PHI, TAN, SQRT])}
+                {this.generateLightButtons([ONE, TWO, THREE])}
+                {this.generateDarkButtons([ADD], "common-operation")}
+            </div>
+                <div className="calculator-input-row">
+                {this.generateDarkButtons([ANS, EXP, MOD])}
+                {this.generateLightButtons([ZERO, DECIMAL])}
+                 {this.generateCustomButton('(-)', NEG, "lighten-btn")}
+                {this.generateButtons([EVALUATE], "blue-btn common-operation")}
+            </div>
+            </div>
         );
     }
-
-    onInputClick(input) {
+    //there are two inputs because of
+    //special case for Neg having (-) as display nmae yet - when doing calculations.
+    //^makes it easier at end when the result ends up being negative
+    onInputClick(inputOnDisplay, inputForCalculation) {
+        const input = inputForCalculation || inputOnDisplay;
 
         if (input === EVALUATE) {
             this.props.evaluateInputs();
