@@ -45,7 +45,7 @@ export default function(state = INITIAL_STATE, action) {
         const result = CalculatorUtils.evaluateInputs(state.inputArray);
         if (isNumeric(result)) {
             const prevInputArray = state.inputArray.slice();
-            const brokenDownToIndividualCharResult = result.toString().split();
+            const brokenDownToIndividualCharResult = result.toString().split('');
             const inputArray = brokenDownToIndividualCharResult;
             const cursorLocation = inputArray.length;
             return {
